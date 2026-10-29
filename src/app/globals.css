@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #05070d;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(124, 92, 255, 0.22), transparent 34%),
+    radial-gradient(circle at top right, rgba(247, 201, 72, 0.16), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(247, 201, 72, 0.13), transparent 28%),
+    #05070d;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #f7c948;
+  color: #111111;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05070d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(247, 201, 72, 0.45);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(247, 201, 72, 0.75);
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #f7c948;
+  outline-offset: 4px;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+}
+
+.glass {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.035)
+    );
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #ffffff, #f7c948);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Recharts cleanup */
+.recharts-wrapper,
+.recharts-surface {
+  outline: none;
+}
+
+/* Mobile balanced performance fix */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+    background: #05070d;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(124, 92, 255, 0.2), transparent 34%),
+      radial-gradient(circle at top right, rgba(247, 201, 72, 0.13), transparent 30%),
+      radial-gradient(circle at bottom right, rgba(247, 201, 72, 0.16), transparent 32%),
+      #05070d;
+  }
+
+  /*
+    Mobile glass:
+    - Blur dimatikan agar tidak glitch di HP tertentu.
+    - Tapi background tetap semi-transparent agar desain premium tidak hilang.
+  */
+  .glass {
+    background:
+      linear-gradient(
+        145deg,
+        rgba(24, 26, 38, 0.74),
+        rgba(8, 10, 18, 0.86)
+      ) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.48) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /*
+    Jangan matikan semua blur/filter global.
+    Ini penting supaya dekorasi background masih tetap hidup.
+  */
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /*
+    Hover effect tidak dibutuhkan di layar sentuh.
+    Ini mengurangi risiko flicker saat scroll.
+  */
+  @media (hover: none) {
+    .group:hover,
+    .group:hover *,
+    article:hover,
+    article:hover *,
+    a:hover,
+    button:hover {
+      transform: none !important;
+    }
+  }
+
+  section,
+  article,
+  header,
+  footer,
+  nav {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  svg,
+  canvas,
+  .recharts-wrapper,
+  .recharts-surface {
+    will-change: auto !important;
+  }
+
+  .recharts-wrapper {
+    transform: translateZ(0);
+  }
+}
+
+/* Very small phones */
+@media (max-width: 420px) {
+  .glass {
+    background:
+      linear-gradient(
+        145deg,
+        rgba(22, 24, 36, 0.78),
+        rgba(8, 10, 18, 0.9)
+      ) !important;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Portfolio Mobile Safe Mode */
+.project-card-mobile-safe {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24, 27, 39, 0.94),
+      rgba(8, 10, 17, 0.98)
+    );
+}
+
+@media (min-width: 769px) {
+  .project-card-mobile-safe {
+    background:
+      radial-gradient(circle at top right, rgba(247, 201, 72, 0.12), transparent 30%),
+      radial-gradient(circle at bottom left, rgba(124, 92, 255, 0.12), transparent 34%),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.035)
+      );
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+
+@media (max-width: 768px) {
+  .project-card-mobile-safe {
+    background:
+      linear-gradient(
+        145deg,
+        rgba(22, 25, 36, 0.97),
+        rgba(8, 10, 17, 0.99)
+      ) !important;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.42) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transform: none !important;
+    contain: paint;
+  }
+
+  .project-card-mobile-safe:hover,
+  .project-card-mobile-safe:hover * {
+    transform: none !important;
+  }
+}
+}
